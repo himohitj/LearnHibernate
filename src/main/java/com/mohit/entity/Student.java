@@ -19,7 +19,7 @@ public class Student {
     @Column(name = "email")
     private String email;
 
-    // Constructors
+    // Constructors - default constructor is required by JPA
     public Student() {}
 
     public Student(String firstName, String lastName, String email) {
