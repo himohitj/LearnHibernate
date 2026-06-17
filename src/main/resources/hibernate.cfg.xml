@@ -1,11 +1,9 @@
-<?xml version='1.0' encoding='utf-8'?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
-
     <session-factory>
 
         <!-- Database -->
@@ -48,9 +46,14 @@
             update
         </property>
 
-        <!-- Entity Registration -->
+        <!-- Enable L2 cache -->
+        <property name="hibernate.cache.use_second_level_cache">true</property>
+        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.jcache.internal.JCacheRegionFactory</property>
+        <property name="hibernate.javax.cache.provider">org.ehcache.jsr107.EhcacheCachingProvider</property>
 
-        <mapping class="com.mohit.entity.Student"/>
+<!--        &lt;!&ndash; Entity Registration &ndash;&gt;-->
+
+<!--        no need to hardcode <mapping class="com.mohit.entity.Student"/>-->
 
     </session-factory>
 
