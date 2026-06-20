@@ -7,22 +7,18 @@ public class HibernateUtil {
 
     private static SessionFactory sessionFactory;
 
-    static {
-        try {
-            // Reads hibernate.cfg.xml from classpath automatically
-            sessionFactory = new Configuration()
-                    .configure()
-                    .buildSessionFactory();
-        } catch (Exception e) {
-            throw new ExceptionInInitializerError("SessionFactory creation failed: " + e);
+    public static SessionFactory getSessionFactory(Class<?>... entityClasses) {
+        if (sessionFactory == null || sessionFactory.isClosed()) {
+            Configuration config = new Configuration().configure();
+            for (Class<?> clazz : entityClasses) {
+                config.addAnnotatedClass(clazz);
+            }
+            sessionFactory = config.buildSessionFactory();
         }
-    }
-
-    public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
     public static void shutdown() {
-        getSessionFactory().close();
+        if (sessionFactory != null) getSessionFactory().close();
     }
 }

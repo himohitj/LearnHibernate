@@ -10,28 +10,28 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "first_name")
     private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
-
-    @Column(name = "email")
     private String email;
 
-    // Constructors - default constructor is required by JPA
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")   // FK column created in students table
+    private Address address;
+
     public Student() {}
 
-    public Student(String firstName, String lastName, String email) {
+    public Student(String firstName, String email, Address address) {
         this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
+        this.address = address;
     }
 
-    // Getters & Setters (or use Lombok @Data)
-    // toString() for printing
+    public Address getAddress() {
+        return address;
+    }
+    // getters, setters
+
     @Override
     public String toString() {
-        return "Student{id=" + id + ", name=" + firstName + " " + lastName + "}";
+        return "Student{name=" + firstName + ", address=" + address + "}";
     }
 }

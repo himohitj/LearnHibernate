@@ -45,12 +45,13 @@
         <!-- Auto Table Creation -->
 
         <property name="hibernate.hbm2ddl.auto">
-            update
+            create
         </property>
 
         <!-- Entity Registration -->
 
         <mapping class="com.mohit.entity.Student"/>
+        <mapping class="com.mohit.entity.Address"/>
 
     </session-factory>
 
