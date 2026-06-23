@@ -19,7 +19,7 @@ public class Student {
     @Column(name = "email")
     private String email;
 
-    // Constructors - default constructor is required by JPA
+    // Default constructor is REQUIRED by JPA/Hibernate (used via reflection to instantiate objects)
     public Student() {}
 
     public Student(String firstName, String lastName, String email) {
@@ -28,8 +28,18 @@ public class Student {
         this.email = email;
     }
 
-    // Getters & Setters (or use Lombok @Data)
-    // toString() for printing
+    // Getters & Setters — required by Hibernate to read/write field values
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
     @Override
     public String toString() {
         return "Student{id=" + id + ", name=" + firstName + " " + lastName + "}";
